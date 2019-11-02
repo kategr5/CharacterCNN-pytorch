@@ -1,7 +1,7 @@
 import torch.nn as nn
 
 class Model(nn.Module):
-    def __init__(self):
+    def __init__(self,dataset='<dataset>'):
         super(Model, self).__init__()
 
         self.layer1 = nn.Sequential(
@@ -41,7 +41,10 @@ class Model(nn.Module):
             nn.ReLU(),
             nn.Dropout(0.5)
          )
-        self.fc3 = nn.Linear(1024, 4)  # number of classes
+        if dataset == 'AGNews':
+            self.fc3 = nn.Linear(1024, 4)  # number of classes
+        elif dataset == '20Newsground':
+            self.fc3 = nn.Linear(1024, 20)
         self.soft = nn.Softmax(dim=1)
 
         #self.weight_init(mean=0.0,std=0.05)
