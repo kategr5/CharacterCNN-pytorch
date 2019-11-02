@@ -10,12 +10,10 @@ data=input('Type Dataset Choice, AGNews or 20Newsground:  ')
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
 #device=torch.device("cpu")
-
 print('device used: ',device)
 
-model = Model()
+model = Model(data)
 model.to(device)
 
 #define train/test here
@@ -37,9 +35,7 @@ for epoch in range(5):
         inputs, labels = inputs.to(device), labels.to(device)
         optimizer.zero_grad()
         y_pred=model(inputs)
-        #print(labels.shape,y_pred.shape)
         loss = loss_crit(y_pred, labels.long())
-        #print(epoch, loss.data.item())
 
         loss.backward()
         optimizer.step()
