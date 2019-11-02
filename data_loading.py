@@ -37,7 +37,7 @@ class Newsground(Dataset):
     def __init__(self, dataset):
         self.dataset = dataset
         self.x_data = dataset.filenames
-        y_data = dataset.targets
+        y_data = dataset.target
         for i in range(len(y_data)):
             y_data[i] -= 1
         self.y_data = y_data
@@ -62,7 +62,6 @@ class Newsground(Dataset):
 
 
 def load_data(dataset='<dataset>',transformation=None,n_train=None,n_test=None):
-
 
     if dataset=='AGNews':
         train = pd.read_csv('https://raw.githubusercontent.com/mhjabreel/CharCnn_Keras/master/data/ag_news_csv/train.csv',header=None)  # 120000x3
