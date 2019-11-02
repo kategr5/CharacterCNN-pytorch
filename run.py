@@ -10,7 +10,9 @@ data=input('Type Dataset Choice, AGNews or 20Newsground:  ')
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
 #device=torch.device("cpu")
+
 print('device used: ',device)
 
 model = Model()
