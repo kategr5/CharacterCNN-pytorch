@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from sys import stdin
 from model import Model
 from data_loading import load_data
 
@@ -11,6 +10,9 @@ data=input('Type Dataset Choice, AGNews or 20Newsground:  ')
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+#device=torch.device("cpu")
+
 print('device used: ',device)
 
 model = Model()
@@ -18,6 +20,7 @@ model.to(device)
 
 #define train/test here
 train_loader,test_loader=load_data(dataset=data)
+
 
 loss_crit=nn.CrossEntropyLoss()
 #optimizer=optim.SGD(model.parameters(),lr=0.001,momentum=0.9)

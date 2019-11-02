@@ -37,7 +37,10 @@ class Newsground(Dataset):
     def __init__(self, dataset):
         self.dataset = dataset
         self.x_data = dataset.filenames
-        self.y_data = dataset.targets
+        y_data = dataset.targets
+        for i in range(len(y_data)):
+            y_data[i] -= 1
+        self.y_data = y_data
 
     def __len__(self):
         return len(self.dataset)
