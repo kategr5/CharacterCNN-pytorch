@@ -6,7 +6,7 @@ from data_loading import load_data
 
 
 data=input('Type Dataset Choice, AGNews or 20Newsground:  ')
-
+size=input('Pick model size, big or small:  ')
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -18,7 +18,6 @@ model.to(device)
 
 #define train/test here
 train_loader,test_loader=load_data(dataset=data)
-
 
 loss_crit=nn.CrossEntropyLoss()
 #optimizer=optim.SGD(model.parameters(),lr=0.001,momentum=0.9)
@@ -41,7 +40,7 @@ for epoch in range(5):
         optimizer.step()
 
         running_loss += loss.item()
-        if i % 10 == 9:  # print every 10 mini-batches
+        if i % 10 == 9:  #report every 10 batches
             print('[%d, %5d] loss: %.3f' %
                   (epoch + 1, i + 1, running_loss / 10))
             running_loss = 0.0
