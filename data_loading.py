@@ -58,22 +58,23 @@ class Newsground(Dataset):
 
 def load_data(dataset='<dataset>',transformation=None,n_train=None,n_test=None):
 
-    if dataset=='AGNews':
-        train = pd.read_csv('https://raw.githubusercontent.com/mhjabreel/CharCnn_Keras/master/data/ag_news_csv/train.csv',header=None)  # 120000x3
-        test = pd.read_csv('https://raw.githubusercontent.com/mhjabreel/CharCnn_Keras/master/data/ag_news_csv/test.csv',header=None)  # 7600x3
-        trainset = AGnews(train)
-        train_loader = DataLoader(dataset=trainset, batch_size=128, num_workers=0, drop_last=False)
-        testset = AGnews(test)
-        test_loader = DataLoader(dataset=testset, batch_size=128, num_workers=0, drop_last=False)
 
-        return train_loader, test_loader
-
-    elif dataset=='20Newsground':
+    if dataset=='20Newsground':
         train = fetch_20newsgroups(subset='train')
         test = fetch_20newsgroups(subset='test')
         trainset = Newsground(train)
         train_loader = DataLoader(dataset=trainset, batch_size=128, num_workers=0, drop_last=False)
         testset = Newsground(test)
+        test_loader = DataLoader(dataset=testset, batch_size=128, num_workers=0, drop_last=False)
+
+        return train_loader, test_loader
+
+    else: #if dataset=='AGNews': AGNews default
+        train = pd.read_csv('https://raw.githubusercontent.com/mhjabreel/CharCnn_Keras/master/data/ag_news_csv/train.csv',header=None)  # 120000x3
+        test = pd.read_csv('https://raw.githubusercontent.com/mhjabreel/CharCnn_Keras/master/data/ag_news_csv/test.csv',header=None)  # 7600x3
+        trainset = AGnews(train)
+        train_loader = DataLoader(dataset=trainset, batch_size=128, num_workers=0, drop_last=False)
+        testset = AGnews(test)
         test_loader = DataLoader(dataset=testset, batch_size=128, num_workers=0, drop_last=False)
 
         return train_loader, test_loader
