@@ -13,7 +13,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 #device=torch.device("cpu")
 print('device used: ',device)
 
-model = Model(data)
+model = Model(data,size)
 model.to(device)
 
 #define train/test here
